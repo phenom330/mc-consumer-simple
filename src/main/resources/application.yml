@@ -1,0 +1,31 @@
+---
+spring:
+  rabbitmq:
+    host: 192.168.17.26
+    port: 5672
+    username: client
+    password: client
+    template:
+      retry:
+        initial-interval: 2s
+        enabled: true
+consumer:
+  appKey: AK_56750752
+  appSecret: AS_16698663
+  queueKey: mc-consumer-simple
+  queueSecret: mc-consumer-simple_secret
+  queueDesc: 简单的消费者示例
+  must-paramaters:
+    param[0]:
+      FIELD: userIds
+      DESCRIPTION: 用户ID, 数组类型
+      IS_ARRAY: true
+      USE_FOR_REV: true
+    param[1]:
+      FIELD: content
+      DESCRIPTION: 内容
+  server:
+    baseUrl: http://mc.wiseloong.com:8081
+    queueRegisterEndpoint: /v1/queue/register
+    tokenEndpoint: /v1/token
+    callBackEndpoint: /v1/msg/callback
